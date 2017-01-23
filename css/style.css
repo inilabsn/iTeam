@@ -1,0 +1,88 @@
+/* User Image & Login */
+body > .header .navbar .nav > li.user > a {
+	padding: 10px;
+}
+
+.user-logo {
+	margin: 0px;
+	padding: 0px;
+	border-radius: 50%;
+    -webkit-border-radius: 50%;
+	height: 30px;
+	width: 30px;
+	margin-right: 5px; 
+	padding: 0px 0px 0px 0px;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu > li.user-body > div.text-center > a {
+	color: #00ACAC;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu {
+	border: 0px;
+	margin-top: 1px;
+  	border-bottom-left-radius: 10px;
+  	border-bottom-right-radius: 10px; 
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px; 
+  -moz-border-bottom-left-radius: 10px;
+  -moz-border-bottom-right-radius: 10px; 
+}
+
+.navbar-nav > .user-menu > .dropdown-menu:after { 
+	border: 0px;
+	margin-top: 1px;
+  	border-bottom-left-radius: 5px;
+  	border-bottom-right-radius: 5px; 
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px; 
+	-moz-border-bottom-left-radius: 5px;
+	-moz-border-bottom-right-radius: 5px; 
+}
+
+.navbar-nav > .user-menu > .dropdown-menu > li.user-footer {
+	border: 0px;
+	margin-top: 1px;
+  	border-bottom-left-radius: 5px;
+  	border-bottom-right-radius: 5px; 
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px; 
+	-moz-border-bottom-left-radius: 5px;
+	-moz-border-bottom-right-radius: 5px; 
+	background-color: #00ACAC;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li.user-footer .btn-ini { 
+background-color: #006A85;
+border: 0;
+color: #fff;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li.user-footer > a:hover .btn-ini { 
+background-color: #000;
+}
+/* User Image & Login */
+
+/* dashboard Widget start */
+.db-icon > .small-box > .icon {
+  position: absolute;
+  top: auto;
+  bottom: 15px;
+  right: 90px;
+  z-index: 0;
+  font-size: 90px;
+  color: rgba(0, 0, 0, 0.15);
+}
+/* dashboard Widget Close */
+.breadcrumb > li.active a {
+	color:#11aaaa !important;
+}
+.progress-bar span {
+	padding-left: 10px;
+	color:#000 !important;
+}
+td > h6 > i {
+	color: #d9534f;
+}
+.gantt_wrapper {
+	height: 600px;
+	width: 100%;
+}
