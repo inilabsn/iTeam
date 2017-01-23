@@ -50,3 +50,4 @@ $lang['page_menu'] = "Project";
 $lang['add_project'] = 'Add project';
 
 $lang['update_project'] = 'Update project';
+$lang['update_task'] = 'Update task';

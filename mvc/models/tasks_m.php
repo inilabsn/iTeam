@@ -41,6 +41,17 @@ class tasks_m extends MY_Model {
 	public function delete_tasks($id){
 		parent::delete($id);
 	}
+
+	// task user model..
+	public function get_task_user($id) {
+		$query = $this->db->get_where('task_user', array('task_id' => $id));
+		return $query->result();
+
+	}
+	public function get_single_task_user($task_id,$user_id) {
+		$query = $this->db->get_where('task_user', array('task_id' => $task_id, 'user_id' => $user_id));
+		return $query->row();
+	}
 }
 
 

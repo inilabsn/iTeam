@@ -30,8 +30,10 @@
                         <thead>
                             <tr>
                                 <th class="col-sm-2"><?=$this->lang->line('slno')?></th>
-                                <th class="col-sm-2"><?=$this->lang->line('timetracker_ttitle')?></th>
+                                <th class="col-sm-2"><?=$this->lang->line('timetracker_title')?></th>
+                                <th class="col-sm-2"><?=$this->lang->line('timetracker_project')?></th>
                                 <th class="col-sm-2"><?=$this->lang->line('timetracker_date')?></th>
+                                <th class="col-sm-2"><?=$this->lang->line('timetracker_user')?></th>
                                 <th class="col-sm-2"><?=$this->lang->line('timetracker_hour')?></th>
                                 <th class="col-sm-2"><?=$this->lang->line('action')?></th>
                             </tr>
@@ -41,21 +43,26 @@
                                 foreach ($timetrackers as $timetracker) {                           
                             ?>
                                 <tr>
-                                    <td data-title="<?=$this->lang->line('slno')?>">
+                                    <td class="col-sm-1" data-title="<?=$this->lang->line('slno')?>">
                                         <?php echo $i; ?>
                                     </td>
                                     <td data-title="<?=$this->lang->line('timetracker_ttitle')?>">
                                         <?=$timetracker->task_title?>
                                     </td>
+                                    <td data-title="<?=$this->lang->line('timetracker_ttitle')?>">
+                                        <?=$timetracker->project_title?>
+                                    </td>
                                     <td data-title="<?=$this->lang->line('timetracker_date')?>">
                                         <?php echo $timetracker->date; ?>
                                     </td>
-
+                                    <td data-title="<?=$this->lang->line('timetracker_date')?>">
+                                        <?php echo $timetracker->name; ?>
+                                    </td>
                                     <td data-title="<?=$this->lang->line('timetracker_hour')?>">                         
-                                       <?=$timetracker->timehour?>
+                                       <?=$timetracker->timehour?> hr
                                     </td>
 
-                                    <td action="" data-title='Action'>
+                                    <td class="col-sm-2" action="" data-title='Action'>
                                         <?php if ($usertype=="Admin" || $usertype=="Project manager"): ?>                                        
                                             <?php echo btn_edit('timetracker/edit/'.$timetracker->project_id.'/'.$timetracker->timetrackerID, '') ?>
                                         <?php endif ?>

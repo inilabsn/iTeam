@@ -113,11 +113,11 @@
                                 echo anchor('user/index', '<i class="icon icon-empolee"></i> Users');
                             ?>
                         </li>                        
-                        <li id="grouptasks">
+                        <!-- <li id="grouptasks">
                             <?php
                                 echo anchor('grouptasks/index', '<i class="fa fa-cloud-download"></i> Group Tasks');
                             ?>
-                        </li>
+                        </li> -->
                         <?php endif ?>
                          <li id="timetracker">
                             <?php

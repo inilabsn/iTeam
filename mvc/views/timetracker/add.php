@@ -124,7 +124,9 @@
 <!-- adding active class at menu item -->
 
 <script>
-    $('#date').datepicker({ dateFormat : "yyyy-mm-dd" });
+    $('#date').datepicker({ dateFormat : "yyyy-mm-dd" }).on('changeDate', function(e){
+        $(this).datepicker('hide');
+    });
     $("#timetracker").addClass("active");
 
     $('#project_id').change(function() {

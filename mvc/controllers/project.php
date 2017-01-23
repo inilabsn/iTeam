@@ -92,6 +92,8 @@ class project extends Admin_Controller {
 				} else {
 					if ($this->input->post("project_client_id")) {
 						$data['client'] = $this->user_m->get_user($this->input->post("project_client_id"));
+					} else {
+						$data['client'] = 0;
 					}
 					$array = array(
 						"project_title" => $this->input->post("project_title"),
@@ -137,7 +139,6 @@ class project extends Admin_Controller {
 								"project_create_date" => $this->input->post("project_create_date"),
 								"project_percentage" => 0,
 								"project_status" => 'in progress',
-								"project_client_name" => $data['client']->name,
 							);
 							$this->project_m->update_project($array, $id);
 							redirect(base_url("project/index"));
@@ -170,6 +171,7 @@ class project extends Admin_Controller {
 			$this->data['grouptask_list'] = $this->grptaskslist_m->get_grptaskslist();
 			$this->data['all_tasks'] = $this->project_m->get_project_task($id);
 			$alltimes = $this->timetracker_m->get_order_by_timetracker(array('projectID' => $id));
+			$this->data['all_timetracker'] = $this->timetracker_m->get_single_project_timetracker($id);
 			if(count($alltimes)) {
 				foreach ($alltimes as  $alltime) {
 					$time += $alltime->timehour;
@@ -265,6 +267,73 @@ class project extends Admin_Controller {
 				$this->data["subview"] = "error";
 				$this->load->view('_layout_main', $this->data);
 			}
+		} else {
+			$this->data["subview"] = "error";
+			$this->load->view('_layout_main', $this->data);
+		}
+	}
+	public function edit_task() {
+		$usertype = $this->session->userdata("usertype");
+		if($usertype == "Admin" || $usertype == "Project manager") {
+			$id = htmlentities(mysql_real_escape_string($this->uri->segment(3)));
+			$task_id = htmlentities(mysql_real_escape_string($this->uri->segment(4)));
+			if((int)$id) {
+				$this->data['task'] = $this->tasks_m->get_tasks($task_id);
+				$this->data['users'] = $this->user_m->get_order_by_user(array('usertype'=>'User'));
+				$this->data['task_users'] = $this->tasks_m->get_task_user($task_id);
+				if ($this->data['task']) {
+					if($_POST) {
+						$rules = $this->task_rules();
+						$this->form_validation->set_rules($rules);
+						if ($this->form_validation->run() == FALSE) {
+							$this->data['form_validation'] = validation_errors(); 
+							$this->session->set_flashdata('error_task', $this->data['form_validation']);
+							redirect(base_url("project/view/$id"));
+						} else {
+
+							$array = array(
+								"task_title" => $this->input->post("title"),
+								"description" => $this->input->post("description"),
+							);					
+							$this->tasks_m->update_tasks($array, $task_id);
+							$userID = $this->input->post('users');
+					    	foreach($userID as $uid){
+					    		$getDbUserList = $this->tasks_m->get_single_task_user($task_id, $uid);
+								if(count($getDbUserList)) {								
+									$taskUserArray = array(
+										'date' => date('Y-m-d')
+									);
+									$this->db->update('task_user', $taskUserArray, array('id' => $getDbUserList->id));
+								} else {
+									$getDbuser = $this->user_m->get_user($uid);
+									$data = array(
+									   'task_id' => $task_id,
+									   'user_id' => $getDbuser->userID ,
+									   'date' => date('Y-m-d')
+									);
+									$this->db->insert('task_user', $data); 
+								}
+					    	}
+
+					    	$getDbAllUserList = $this->tasks_m->get_task_user($task_id);
+					    	foreach ($getDbAllUserList as $item) {
+					    		if(!in_array($item->user_id, $userID)) {
+					    			$this->db->delete('task_user', array('id' => $item->id)); 
+					    		}
+					    	}
+							redirect(base_url("project/view/$id"));							
+						}
+					} else {
+						$this->data["subview"] = "project/edit_task";
+						$this->load->view('_layout_main', $this->data);
+					}
+				} else {
+					redirect(base_url('project/index'));
+				}
+			} else {
+				$this->data["subview"] = "error";
+				$this->load->view('_layout_main', $this->data);
+			}	
 		} else {
 			$this->data["subview"] = "error";
 			$this->load->view('_layout_main', $this->data);

@@ -15,6 +15,7 @@ $lang['timetracker_date'] = "Date";
 $lang['timetracker_hour'] = "hour";
 $lang['timetracker_tasks'] = "Tasks";
 $lang['timetracker_title'] = "Task Title";
+$lang['timetracker_user'] = "User";
 $lang['action'] = "Action";
 
 $lang['add_timetracker'] = 'Add Time Tracker';

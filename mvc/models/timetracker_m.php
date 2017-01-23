@@ -56,7 +56,32 @@ class Timetracker_m extends MY_Model {
 		$this->db->select('*');
 		$this->db->from('timetracker');
 		$this->db->where(array('timetracker.userID' => $userID));
-		$this->db->join('tasks', 'tasks.task_id = timetracker.taskID');
+		$this->db->join('tasks', 'tasks.task_id = timetracker.taskID', 'left');
+		$this->db->join('users', 'timetracker.userID = users.userID', 'left');
+		$this->db->join('projects', 'timetracker.projectID = projects.project_id', 'left');
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function get_all_timetracker() {
+		$this->db->select('*');
+		$this->db->from('timetracker');
+		$this->db->join('tasks', 'tasks.task_id = timetracker.taskID', 'left');
+		$this->db->join('users', 'timetracker.userID = users.userID', 'left');
+		$this->db->join('projects', 'timetracker.projectID = projects.project_id', 'left');
+		$this->db->order_by("timetracker.projectID", "desc");
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function get_single_project_timetracker($id) {
+		$this->db->select('*');
+		$this->db->from('timetracker');
+		$this->db->where(array('timetracker.projectID' => $id));
+		$this->db->join('tasks', 'tasks.task_id = timetracker.taskID', 'left');
+		$this->db->join('users', 'timetracker.userID = users.userID', 'left');
+		$this->db->join('projects', 'timetracker.projectID = projects.project_id', 'left');
+		$this->db->order_by("timetracker.projectID", "desc");
 		$query = $this->db->get();
 		return $query->result();
 	}

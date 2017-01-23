@@ -13,7 +13,11 @@ class Timetracker extends Admin_Controller {
 	public function index() {
 		$usertype = $this->session->userdata("usertype");
 		$userID = $this->session->userdata("userID");
-		if($usertype) {
+		if($usertype=="Admin" || $usertype=="Project manager"){
+			$this->data['timetrackers'] = $this->timetracker_m->get_all_timetracker();
+			$this->data["subview"] = "timetracker/index";
+			$this->load->view('_layout_main', $this->data);
+		} elseif($usertype=="User") {
 			$this->data['timetrackers'] = $this->timetracker_m->get_user_timetracker($userID);
 			$this->data["subview"] = "timetracker/index";
 			$this->load->view('_layout_main', $this->data);

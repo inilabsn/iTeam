@@ -110,6 +110,7 @@
                                 <!-- General tools such as edit or delete-->
                                 <div class="tools">
                                     <a href="<?=base_url('project/change_status/'.$project->project_id."/".$task->task_id)?>"><small class="btn <?php if($task->status==1){?>btn-success btn-xs<?php } else {?>btn-danger btn-xs<?php } ?>" data-toggle="tooltip" data-original-title="Change Status"><i class="fa fa-edit"></i> <?php if($task->status==0){echo "Complete";} else {echo "in Process";}?></small></a>
+                                    <?php echo btn_edit('project/edit_task/'.$project->project_id."/".$task->task_id, '') ?>
                                     <?php echo btn_delete('project/delete_task/'.$project->project_id."/".$task->task_id, '') ?>
                                 </div>                               
                             </li>
@@ -153,16 +154,7 @@
                 <i class="ion ion-clipboard"></i>
                 <h3 class="box-title">Group Task</h3>
             </div><!-- /.box-header -->
-            <div class="box-body">
-<!--                 <?php foreach ($grouptask as $group): ?>
-                    group:<?php echo $group->group_name."<br>"; ?>
-                    <?php foreach ($grouptask_list as $item): ?>
-                        <?php if ($item->groupID == $group->grouptasksID): ?>
-                            task:<?php echo $item->name."<br>"; ?>
-                        <?php endif ?>
-                    <?php endforeach ?>
-                <?php endforeach ?> -->
-                
+            <div class="box-body">                
                 <ul class="todo-list">
                 <?php foreach ($grouptask as $group): ?>
                     <li class="">
@@ -200,7 +192,51 @@
                 <a class="btn btn-primary pull-right" href="<?=base_url('grouptasks/add/'.$project->project_id)?>"><i class="fa fa-plus"></i> Add item</a>
             </div>
         </div><!-- /.box -->
-    </div>    
+    </div>
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                <i class="ion ion-clipboard"></i>
+                <h3 class="box-title">Timetracker</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body">
+                <table class="table table-bordered">
+                <thead>
+                    <th>
+                        Task
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        User
+                    </th>
+                    <th>
+                        Hour
+                    </th>
+                </thead>
+                <tbody>
+                <?php foreach ($all_timetracker as $time): ?>
+                    <tr>
+                        <td>
+                            <?php echo $time->task_title; ?>
+                        </td>
+                        <td>
+                            <?php echo $time->date; ?>
+                        </td>
+                        <td>
+                            <?php echo $time->name; ?>
+                        </td>
+                        <td>
+                            <?php echo $time->timehour; ?>
+                        </td>
+                    </tr>
+                <?php endforeach ?> 
+                </tbody>
+                </table>                                
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </div>     
     <?php
         }
     ?>
